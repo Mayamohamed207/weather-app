@@ -1,0 +1,52 @@
+
+<div class="dashboard">
+  <app-city-selector (citySelected)="onCitySelected($event)"></app-city-selector>
+
+  <div *ngIf="weatherData" class="weather-card">
+    <div class="weather-header">
+      <h2 class="city-name">{{ weatherData.name }}</h2>
+      <div class="weather-description">{{ weatherData.weather[0].description | titlecase }}</div>
+    </div>
+    
+    <div class="weather-main">
+      <div class="temperature-display">
+        <div class="current-temp">{{ weatherData.main.temp | temperature:'°' }}</div>
+        <div class="temp-range">
+          <span class="temp-min">{{ weatherData.main.temp_min | temperature:'°' }}</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-max">{{ weatherData.main.temp_max | temperature:'°' }}</span>
+        </div>
+      </div>
+      
+      <div class="weather-icon">
+        <img [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@4x.png'" 
+             [alt]="weatherData.weather[0].description"
+             class="weather-icon-img">
+      </div>
+    </div>
+    
+    <div class="weather-details">
+      <div class="detail-item">
+        <div class="detail-icon">💧</div>
+        <div class="detail-content">
+          <div class="detail-value">{{ weatherData.main.humidity }}%</div>
+          <div class="detail-label">Humidity</div>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-icon">🌬️</div>
+        <div class="detail-content">
+          <div class="detail-value">{{ weatherData.wind.speed }} km/h</div>
+          <div class="detail-label">Wind</div>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-icon">📊</div>
+        <div class="detail-content">
+          <div class="detail-value">{{ weatherData.main.pressure }} hPa</div>
+          <div class="detail-label">Pressure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
